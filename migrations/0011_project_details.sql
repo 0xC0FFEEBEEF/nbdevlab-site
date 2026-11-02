@@ -1,0 +1,1 @@
+ALTER TABLE projects ADD COLUMN details TEXT NOT NULL DEFAULT '';

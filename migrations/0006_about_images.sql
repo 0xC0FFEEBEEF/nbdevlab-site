@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS about_images (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  r2_key TEXT NOT NULL UNIQUE,
+  original_name TEXT NOT NULL,
+  mime_type TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);

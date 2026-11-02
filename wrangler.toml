@@ -1,0 +1,28 @@
+name = "nbdevlab"
+main = "worker/index.ts"
+compatibility_date = "2026-03-09"
+
+[assets]
+directory = "dist"
+binding = "ASSETS"
+# Let the Worker distinguish app routes from misses; serve bundled assets directly.
+run_worker_first = ["/*", "!/assets/*", "!/404-assets/*"]
+not_found_handling = "404-page"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "nbdevlab-db"
+database_id = "cd41683e-8d73-457c-9ddc-8c02d6e53114"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "nbdevlab-images"
+
+# Cloudflare Images: converts PNG/JPEG to WebP when the browser accepts it (functions/_shared/imageResponse.ts).
+[images]
+binding = "IMAGE_TRANSFORMS"
+
+# Workers Logs: ~500 requests/day against a free allowance of 200,000 log events/day.
+[observability]
+enabled = true
+head_sampling_rate = 1
