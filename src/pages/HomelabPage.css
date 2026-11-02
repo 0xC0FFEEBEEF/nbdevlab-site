@@ -1,0 +1,308 @@
+.homelab-page {
+
+& {
+  /* Layout: one long page on pitch black. Open bands split by hairlines; figures fill the column and
+     scale automatically with the available width. Colour means network, violet means slerm. */
+  --bg: #000000;
+  --card: #06080c;
+  --raise: #0e1118;
+  --line: #1b2029;
+  --line-2: #2a313d;
+  --text: #e7ecf3;
+  --text-2: #a4aebd;
+  --muted: #677284;
+  --accent: #8ea8ff;
+  --violet: #b69bff;
+  --violet-wash: rgba(182,155,255,.12);
+  --lan: #3ddc97;
+  --mgmt: #f3b64b;
+  --srv: #8ea8ff;
+  --dmz: #ff7a90;
+  --bad: #ff6b6b;
+  --sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  color-scheme: dark;
+}
+
+& { margin: 0; font: 15px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+
+/* svg */
+.pz { display: block; height: auto; }
+.pz text { font-family: var(--sans); font-size: 12.5px; fill: var(--text-2); }
+.pz .m { font-family: var(--mono); font-size: 11px; }
+.pz .sm { font-size: 12.5px; }
+.pz .xs { font-size: 10.5px; }
+.pz .ey { font-size: 10px; letter-spacing: .14em; font-weight: 500; fill: var(--muted); }
+.pz .ti { font-size: 17px; font-weight: 600; fill: var(--text); letter-spacing: -.01em; }
+.pz .nm { font-size: 13px; font-weight: 600; fill: var(--text); }
+.pz .big { font-size: 30px; font-weight: 600; fill: var(--text); letter-spacing: -.02em; }
+.pz .mu, .pz tspan.mu { fill: var(--muted); }
+.pz .tx { fill: var(--text); }
+.pz .card { fill: var(--card); stroke: var(--line-2); stroke-width: 1; }
+.pz .frame { fill: none; }
+.pz .card-hi { stroke: #3a4352; }
+.pz .parked-card { stroke-dasharray: 4 4; }
+.pz .hr { stroke: var(--line); stroke-width: 1; }
+.pz .grid { stroke: var(--line); stroke-width: 1; }
+.pz .w { fill: none; stroke-width: 2.25; stroke-linecap: round; }
+.pz .stub { fill: none; stroke-width: 3; stroke-linecap: round; }
+.pz .halo { fill: none; stroke: var(--bg); stroke-width: 9; }
+.pz .nt { fill: none; stroke: var(--muted); stroke-width: 1.25; }
+.pz .dash { stroke-dasharray: 5 5; }
+.pz .req { fill: none; stroke: var(--violet); stroke-width: 1.75; }
+.pz .ah { fill: var(--muted); }
+.pz .pw-b { fill: none; stroke: var(--text-2); stroke-width: 2; }
+.pz .pw-s { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 3 4; }
+.pz .psu { fill: var(--text-2); }
+.pz .st-run { fill: var(--text); }
+.pz .st-off { fill: var(--bg); stroke: var(--text-2); stroke-width: 1.25; }
+.pz .pill { fill: none; stroke-width: 1; }
+.pz .p-tun { stroke: var(--line-2); }
+.pz .pt-tun { fill: var(--text-2); }
+.pz .p-slerm { stroke: var(--violet); }
+.pz .pt-slerm { fill: var(--violet); }
+.pz .p-state { stroke: var(--line-2); fill: var(--card); }
+.pz .s-lan { stroke: var(--lan); } .pz .f-lan { fill: var(--lan); }
+.pz .s-mgmt { stroke: var(--mgmt); } .pz .f-mgmt { fill: var(--mgmt); }
+.pz .s-srv { stroke: var(--srv); } .pz .f-srv { fill: var(--srv); }
+.pz .s-dmz { stroke: var(--dmz); } .pz .f-dmz { fill: var(--dmz); }
+.pz .seg { stroke: none; }
+.pz .gpu1 { fill: var(--violet); } .pz .gpu2 { fill: #8f74e0; }
+.pz .cpu1 { fill: #5d6678; } .pz .cpu2 { fill: #4b5364; } .pz .cpu3 { fill: #7a8499; }
+.pz .seg-t { fill: #0b0d12; font-weight: 500; }
+.pz .bar { fill: var(--violet); }
+.pz .b-wait { fill: #3a4352; }
+.pz .b-off { fill: var(--text-2); }
+.pz .b-keep { fill: #1c2230; stroke: var(--line-2); }
+.pz .b-slerm { fill: rgba(182,155,255,.16); stroke: rgba(182,155,255,.45); }
+.pz .b-keep + text, .pz .b-slerm + text { fill: var(--text-2); }
+.pz .deadline { stroke: var(--bad); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.pz .dl { fill: var(--bad); }
+
+/* motion: packets ride the wires, running dots homelab-breathe, tunnels homelab-march, the outage replays.
+   Everything here is off unless the page sets &.motion on the root, so the PNG posters stay still. */
+.pz .pk { pointer-events: none; opacity: 0; }
+&:not(.motion) .pz .pk { display: none; }
+.pz .pk-c { fill: currentColor; }
+.pz .pk-h { fill: currentColor; opacity: .2; }
+.pz .k-text { color: var(--text); } .pz .k-power { color: var(--text-2); } .pz .k-violet { color: var(--violet); }
+.pz .k-lan { color: var(--lan); } .pz .k-mgmt { color: var(--mgmt); }
+.pz .k-srv { color: var(--srv); } .pz .k-dmz { color: var(--dmz); }
+.pz .ph { display: none; pointer-events: none; transition: opacity .6s var(--ease); }
+&.motion .pz .ph.on { display: inline; }
+.pz .ph-veil { fill: var(--bg); opacity: .62; }
+.pz .ph-line { stroke: var(--text); stroke-width: 1.25; }
+.pz .ph-tag { fill: var(--text); }
+.pz .ph-t { font-family: var(--mono); font-size: 10.5px; font-weight: 500; fill: var(--bg); }
+&.motion .pz .st-run { animation: homelab-breathe 3.6s ease-in-out infinite; }
+&.motion .pz .dash { animation: homelab-march 1.6s linear infinite; }
+&.motion .pz .p-state { animation: homelab-state-on 10s linear infinite; }
+@keyframes homelab-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes homelab-march { to { stroke-dashoffset: 10; } }
+@keyframes homelab-state-on {
+  0%, 22% { stroke: var(--violet); fill: var(--violet-wash); }
+  26%, 100% { stroke: var(--line-2); fill: var(--card); }
+}
+
+.wrap { max-width: 1320px; margin: 0 auto; padding-inline: 24px; }
+@media (max-width: 600px) { .wrap { padding-inline: 16px; } }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.homelab-hero { padding-block: 56px 28px; }
+.eyebrow { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.02; letter-spacing: -.035em; margin: 14px 0 16px; font-weight: 600; text-wrap: balance; }
+h1 span { color: var(--muted); font-weight: 500; }
+.lede { max-width: 68ch; color: var(--text-2); font-size: 16.5px; margin: 0; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line); margin-top: 32px; }
+.stat { padding: 16px 16px 14px 0; min-width: 0; }
+.stat + .stat { padding-left: 16px; border-left: 1px solid var(--line); }
+@media (max-width: 700px) { .stat + .stat { border-left: 0; padding-left: 0; } }
+.stat b { display: block; font: 600 26px/1.1 var(--sans); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12.5px; color: var(--muted); }
+
+.controls { display: flex; gap: 10px 22px; flex-wrap: wrap; align-items: center; padding-block: 16px; color: var(--text-2); font-size: 13.5px; }
+.switch { display: inline-flex; align-items: center; gap: 9px; cursor: pointer; user-select: none; }
+.switch input { min-height: 0; padding: 0; border: 0; flex-shrink: 0; appearance: none; width: 32px; height: 18px; border-radius: 9px; background: var(--line-2); position: relative; margin: 0; cursor: pointer; transition: background .2s var(--ease); }
+.switch input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--text); transition: transform .2s var(--ease); }
+.switch input:checked { background: var(--accent); }
+.switch input:checked::after { transform: translateX(14px); }
+
+section.band { border-top: 1px solid var(--line); padding-block: 40px 44px; scroll-margin-top: 64px; }
+section.band h2 { font-size: 24px; letter-spacing: -.02em; margin: 8px 0 10px; font-weight: 600; }
+section.band p { max-width: 70ch; color: var(--text-2); margin: 0 0 14px; }
+section.band > h3 { font-size: 18px; letter-spacing: -.01em; margin: 34px 0 8px; font-weight: 600; }
+figure { margin: 22px 0 0; }
+.fig-scroll { overflow-x: auto; overscroll-behavior-x: contain; }
+.fig-scroll .pz { width: 100%; }
+figcaption { color: var(--muted); font-size: 13px; margin-top: 12px; max-width: 80ch; }
+
+ol.seq { margin: 0; padding: 0; list-style: none; counter-reset: s; max-width: 80ch; }
+ol.seq li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 6px; padding: 9px 0; border-bottom: 1px solid var(--line); color: var(--text-2); }
+ol.seq li::before { content: counter(s); font: 500 12px/1.9 var(--mono); color: var(--muted); }
+ol.seq b { color: var(--text); font-weight: 600; }
+
+.table-scroll { overflow-x: auto; margin-top: 18px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 860px; }
+th { text-align: left; font: 500 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+  padding: 10px 14px 10px 0; border-bottom: 1px solid var(--line-2); white-space: nowrap; }
+td { padding: 10px 14px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--text-2); }
+td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; }
+td.num, td .mono, .mono { font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+td.sub { color: var(--muted); font-weight: 400; }
+.net { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.net::before { content: ""; width: 12px; height: 3px; border-radius: 2px; background: var(--c); }
+.tag { display: inline-block; font: 500 11px/1 var(--mono); padding: 3px 7px; border: 1px solid var(--line-2); border-radius: 999px; color: var(--text-2); margin-right: 4px; }
+.tag.slerm { border-color: var(--violet); color: var(--violet); }
+.state { font: 12px var(--mono); white-space: nowrap; }
+.state::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 7px; background: var(--text); vertical-align: 1px; }
+.state.off::before { background: none; box-shadow: inset 0 0 0 1.25px var(--text-2); }
+
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 0 40px; margin-top: 22px; }
+.rules div { border-top: 1px solid var(--line); padding-block: 16px 18px; min-width: 0; }
+.rules h3 { font-size: 15px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 6px; }
+.rules p { font-size: 14px; color: var(--text-2); margin: 0; }
+ol.log { list-style: none; margin: 18px 0 0; padding: 0; max-width: 80ch; }
+ol.log li { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding-block: 11px; border-bottom: 1px solid var(--line); color: var(--text-2); }
+ol.log time { font: 500 12px/1.9 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+ol.log li.next time { color: var(--accent); }
+
+/* scroll reveal for the page around the diagrams: blocks settle out of a blur, section hairlines draw across */
+&.rv-on .rv-b { opacity: 0; translate: 0 18px; filter: blur(6px); }
+&.rv-on tr.rv-b { filter: none; translate: 0 10px; }
+&.rv-on .rv-b.rv-go { opacity: 1; translate: 0 0; filter: blur(0);
+  transition: opacity .8s var(--ease), translate 1s var(--ease), filter .8s var(--ease); transition-delay: var(--d, 0s); }
+&.rv-on section.band { border-top-color: transparent; position: relative; }
+&.rv-on section.band::before { content: ""; position: absolute; inset: -1px 0 auto 0; height: 1px; background: var(--line);
+  transform-origin: 0 50%; transition: transform 1.4s var(--ease); }
+&.rv-on section.band.rv-line::before { transform: scaleX(0); }
+
+.parked { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px 36px; margin-top: 26px; }
+.parked h3 { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.parked p { font-size: 13.5px; color: var(--text-2); margin: 0; }
+footer { border-top: 1px solid var(--line); padding-block: 28px 48px; color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+}
+
+.public-main.public-main--homelab {
+  width: min(1600px, 95vw);
+  min-width: 0;
+  margin-top: 0;
+}
+
+.homelab-page {
+  min-width: 0;
+  background: var(--bg);
+
+  .wrap { width: 100%; max-width: none; margin: 0; padding-inline: 0; }
+  .homelab-hero { padding-top: clamp(28px, 4vw, 56px); }
+  section.band { scroll-margin-top: 90px; }
+  .fig-scroll { width: 100%; min-width: 0; }
+  .fig-scroll .pz { width: 100%; max-width: 100%; height: auto; }
+  .table-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .parked { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  a { color: inherit; }
+
+  @media (max-width: 640px) {
+    .homelab-hero { padding-bottom: 20px; }
+    .lede { font-size: 15.5px; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stat { padding-block: 14px; }
+    .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .stat b { font-size: 24px; }
+    section.band { padding-block: 28px; }
+    section.band h2 { font-size: 22px; }
+    figure { margin-top: 16px; }
+  }
+
+  /* Diagrams drawn well below their natural size (phones, small tablets) open full screen on a tap. */
+  .fig-scroll { position: relative; }
+  .fig-zoomable { cursor: zoom-in; }
+  .fig-zoom { display: none; }
+  .fig-zoomable .fig-zoom {
+    position: absolute; right: 6px; bottom: 6px;
+    display: inline-flex; align-items: center; gap: 6px;
+    min-height: 32px; padding: 0 11px 0 9px;
+    border: 1px solid var(--line-2); border-radius: 999px;
+    background: rgba(0, 0, 0, .78); color: var(--text-2);
+    font: 500 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase;
+    cursor: pointer;
+  }
+  .fig-zoom svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Phones: the two tables become lists. Each row is a block; cells carry their column name in data-label. */
+  @media (max-width: 640px) {
+    .table-scroll { overflow: visible; }
+    .table-scroll table { min-width: 0; }
+    .table-scroll table, .table-scroll tbody, .table-scroll tr, .table-scroll td { display: block; }
+    .table-scroll thead { display: none; }
+    .table-scroll tr { padding-block: 14px; border-bottom: 1px solid var(--line); }
+    .table-scroll td { padding: 0; border: 0; }
+    /* "tr >" lifts this above the per-column rules below, which would show the blank cell again. */
+    .table-scroll td[data-empty], #hardware tr > td[data-empty], #guests tr > td[data-empty] { display: none; }
+
+    /* Hardware: "byteme2  Proxmox VE · main hypervisor", then one labelled line per spec. */
+    #hardware td:nth-child(1), #hardware td:nth-child(2) { display: inline; }
+    #hardware td:nth-child(1) { font-size: 15.5px; margin-right: 8px; }
+    #hardware td:nth-child(2) { font-size: 13.5px; }
+    #hardware td:nth-child(n + 3) {
+      display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 12px;
+      margin-top: 6px; font-size: 13.5px; line-height: 1.45;
+    }
+    #hardware td:nth-child(n + 3)::before {
+      content: attr(data-label);
+      font: 500 10px/2 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+    }
+    #hardware td:nth-child(3) { margin-top: 10px; }
+
+    /* Guests: name and state on one line, the role under it, then type · host · network · RAM · disk and tags. */
+    #guests tr { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; row-gap: 3px; padding-block: 12px; }
+    #guests td:nth-child(1) { order: 1; flex: 1 1 auto; font-size: 15px; }
+    #guests td:nth-child(4) { order: 2; }
+    #guests td:nth-child(5) { order: 3; flex-basis: 100%; font-size: 13.5px; }
+    #guests td:nth-child(2), #guests td:nth-child(3), #guests td:nth-child(6),
+    #guests td:nth-child(7), #guests td:nth-child(8) {
+      order: 4; font: 12px/1.6 var(--mono); color: var(--muted);
+    }
+    #guests td:nth-child(6) .net { font: inherit; gap: 5px; }
+    #guests td:nth-child(7)::before, #guests td:nth-child(8)::before { content: attr(data-label) " "; text-transform: lowercase; }
+    #guests td:nth-child(9) { order: 5; flex-basis: 100%; margin-top: 3px; }
+  }
+
+  /* Full-screen diagram viewer (src/lib/homelabPhone.ts). The live diagram is moved in at a readable width. */
+  &.homelab-zoom {
+    position: fixed; inset: 0; z-index: 140;
+    display: flex; flex-direction: column;
+    animation: homelab-zoom-in .2s var(--ease) both;
+  }
+  .homelab-zoom__bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 10px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .homelab-zoom__title {
+    flex: 1; min-width: 0; margin: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size: 16px; font-weight: 600; letter-spacing: -.01em; color: var(--text);
+  }
+  .homelab-zoom__step, .homelab-zoom__close {
+    height: 38px; border: 1px solid var(--line-2); background: none; color: var(--text); cursor: pointer;
+  }
+  .homelab-zoom__step { width: 38px; padding: 0; border-radius: 50%; font-size: 19px; line-height: 1; }
+  .homelab-zoom__step:disabled { opacity: .3; cursor: default; }
+  .homelab-zoom__close {
+    margin-left: 4px; padding: 0 15px; border-radius: 999px;
+    font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase;
+  }
+  .homelab-zoom__stage {
+    flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain;
+    padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+  .homelab-zoom__stage .pz { max-width: none; }
+  .homelab-zoom__stage:focus-visible { outline-offset: -3px; }
+}
+
+@keyframes homelab-zoom-in { from { opacity: 0; } }

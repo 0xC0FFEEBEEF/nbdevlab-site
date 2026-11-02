@@ -1,0 +1,10 @@
+# Copy this to .dev.vars and fill in your values.
+# These are only needed for admin endpoints; public pages work without them.
+ADMIN_USER=your_admin_username
+ADMIN_PASS=your_admin_password
+ADMIN_SESSION_SECRET=some_random_string_32_chars_or_more
+
+# Optional — if you want the weather station endpoint to work locally
+# TEMPEST_ACCESS_TOKEN=
+# TEMPEST_STATION_ID=
+# TEMPEST_API_BASE_URL=
